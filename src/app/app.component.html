@@ -3,5 +3,8 @@
 <button (click)="alteraTexto()">Alterar</button>
 
 <ul>
-  <li *ngFor="let todo of todos">{{ todo }} - <button>Concluir</button> | <button>Remover</button></li>
+  <li *ngFor="let todo of todos">{{ todo.id }}. {{ todo.title }} - 
+  	<button *ngIf="!todo.done">Concluir</button> | 
+  	<button *ngIf="todo.done">Refazer</button> 
+  	<button >Remover</button></li>
   </ul>
