@@ -23,18 +23,27 @@ export class AppComponent {
 
 		});
 
-
-
-
-		this.todos.push(new Todo(1, 'passear com o cachorro', false));
-        this.todos.push(new Todo(2, 'ir ao supermercado', false));
-        this.todos.push(new Todo(3, 'cortar o cabelo', true));
-
-
 	}
 
 	alteraTexto() {
 		this.title = 'Teste';
+	}
+
+	add() {
+		//alternativa ao abaixo this.form.value => { title: 'Titulo'}
+		const title = this.form.controls['title'].value;
+		const id = this.todos.length + 1;
+		this.todos.push(new Todo(id, title, false));
+		this.save();
+		this.clear();
+}
+
+	clear() {
+		this.form.reset();
+	
+
+
+
 	}
 
 	remove(todo: Todo) {
@@ -52,5 +61,10 @@ export class AppComponent {
 
 	markAsUndone(todo: Todo){
 		todo.done = false;
+	}
+
+	save() {
+		const data = JSON.stringify(this.todos);
+		localStorage.setItem('todos', data);
 	}
 }
